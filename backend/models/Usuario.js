@@ -1,6 +1,6 @@
 const {Schema, model} = require('mongoose');
 
-const RoleSchema= Schema({
+const UsuarioSchema= Schema({
     nombre:{
         type:String,
         required: [true, 'El nombre es obligatorio']
@@ -12,7 +12,7 @@ const RoleSchema= Schema({
     rol:{
         type:String,
         required: [true, 'El nombre es obligatorio'],
-        default: 'Usuario regular'
+        default: 'UsuarioRegular'
     },
     email:{
         type:String,
@@ -32,6 +32,6 @@ const RoleSchema= Schema({
     }
 })
 
-const Role = model('Role',RoleSchema);
+const Usuario = model('Usuario',UsuarioSchema);
 
-module.exports = Role;
+module.exports = Usuario;

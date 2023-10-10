@@ -16,7 +16,7 @@ const isAdminRole = ( req, res, next ) => {
    } 
    const { rol, nombre } = req.usuario;
    
-   if ( rol !== 'Admin' ) {
+   if ( rol !== 'UsuarioAdministrador' ) {
        return res.status(401).json({
            msg: `${ nombre } no es administrador - No puede hacer esto`
        });
@@ -35,7 +35,7 @@ const permisosRol = async (req, res, next) => {
     const { rol, nombre } = req.usuario;
     
     // Utiliza el operador lógico || para permitir 'Admin' o 'Autoridad'
-    if (rol !== 'Admin' && rol !== 'Autoridad') {
+    if (rol !== 'UsuarioAdministrador') {
         return res.status(401).json({
             msg: `${nombre} no es administrador ni autoridad - No puede hacer esto`
         });
@@ -50,10 +50,10 @@ const userExistsById = async( id ) => {
         throw new Error(`El id (usuario) no existe ${ id }`);
     }
 }
-const emailExiste = async( correoElectronico = '' ) => {
-    const existeEmail = await Usuario.findOne({correoElectronico});
+const emailExiste = async( email = '' ) => {
+    const existeEmail = await Usuario.findOne({email});
     if(existeEmail){
-        throw new Error(`El email: ${ correoElectronico }, ya está registrado`);
+        throw new Error(`El email: ${ email }, ya está registrado`);
     }
  }
 module.exports={isValidRole,emailExiste,permisosRol,userExistsById,isAdminRole}

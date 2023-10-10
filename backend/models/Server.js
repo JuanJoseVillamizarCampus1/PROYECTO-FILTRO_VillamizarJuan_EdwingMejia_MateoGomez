@@ -9,7 +9,9 @@ class Server {
         this.middlewares()
         this.connectionDb()
         this.path={
-            role:'/api/roles'
+            role:'/api/roles',
+            login:'/api/login',
+            usuario:'/api/usuarios'
          }
         this.routes()
     }
@@ -21,10 +23,13 @@ class Server {
         this.app.use(express.json())
     }
     routes(){
-        this.app.use(this.path.role,require('../routes/role.routes'))
+        this.app.use(this.path.role,require('../routes/role.routes'));
+        this.app.use(this.path.usuario,require('../routes/usuarios.routes'));
+        this.app.use(this.path.login,require('../routes/login.routes'));
+        
     }
     listening(){
-        this.app.listen(this.port,()=>{console.log(`EScuchando el puerto ${this.port}`)})
+        this.app.listen(this.port,()=>{console.log(`Escuchando el puerto ${this.port}`)})
     }
 }
 module.exports= Server;
